@@ -33,8 +33,9 @@ UserSchema.pre('save', function(callback) {
       if (err) {
         return callback(err);
       }
-      
+
       user.password = hash;
+      console.log();
       callback();
     });
   });

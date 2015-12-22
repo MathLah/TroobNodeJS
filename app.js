@@ -13,7 +13,7 @@ var User = require('./models/user.js');
 var app = express();
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/todoApp', function(err) {
+mongoose.connect('mongodb://localhost/troobnodejs', function(err) {
     if(err) {
         console.log('connection to MongoDB error', err);
     } else {
