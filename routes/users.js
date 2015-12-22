@@ -5,8 +5,10 @@ var userController = require('../controllers/user');
 
 /* GET users listing. */
 router.get('/', userController.getUsers);
-router.post('/', userController.postUsers);
+router.get('/:name', userController.getUser);
+router.post('/', userController.postUser);
+router.put('/:name', userController.updateUser);
 //router.delete('/all', userController.deleteAllUsers);
-router.delete('/:name', userController.deleteUsers);
+router.delete('/:name', userController.deleteUser);
 
 module.exports = router;
