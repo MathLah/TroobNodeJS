@@ -4,12 +4,15 @@ var router = express.Router();
 var userController = require('../controllers/user');
 var authController = require('../controllers/auth');
 
-router.get('/', authController.isBearerAuthenticated, userController.getUsers);
-router.get('/:name', authController.isBearerAuthenticated, userController.getUser);
-router.post('/', authController.isBearerAuthenticated, userController.postUser);
-router.put('/:name', authController.isBearerAuthenticated, userController.updateUser);
-//router.delete('/all', userController.deleteAllUsers);
-router.delete('/:name', authController.isBearerAuthenticated, userController.deleteUser);
+router.route('/')
+    .get(authController.isBearerAuthenticated, userController.getUsers)
+    .post(authController.isBearerAuthenticated, userController.postUser);
 
+router.route('/:name')
+    .get(authController.isBearerAuthenticated, userController.getUser)
+    .put(authController.isBearerAuthenticated, userController.updateUser)
+    .delete(authController.isBearerAuthenticated, userController.deleteUser);
+
+//router.delete('/all', userController.deleteAllUsers);
 
 module.exports = router;

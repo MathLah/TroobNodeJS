@@ -4,7 +4,6 @@ var User = require('../models/user');
 var Client = require('../models/client');
 var Token = require('../models/token');
 var RefreshToken = require('../models/refreshToken');
-var Code = require('../models/code');
 var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 

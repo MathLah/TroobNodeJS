@@ -69,12 +69,13 @@ describe("USER unit test",function(){
       .send({"username": "testUser", "password": "testUser"})
       .expect("Content-type",/json/)
       .set('Authorization', 'Bearer ' + token)
-      .expect(200)
+      .expect(201)
       .end(function(err, res){
         should.exist(res);
-        res.status.should.equal(200);
+        res.status.should.equal(201);
         (res.body.error === null).should.be.true;
-        should.exist(res.body.id);
+        should.exist(res.body.ok);
+        res.body.ok.should.equal(1);
         done();
       });
   });
@@ -123,7 +124,8 @@ describe("USER unit test",function(){
         should.exist(res);
         res.status.should.equal(200);
         (res.body.error === null).should.be.true;
-        should.exist(res.body.id);
+        should.exist(res.body.ok);
+        res.body.ok.should.equal(1);
 
         done();
       });
@@ -153,7 +155,8 @@ describe("USER unit test",function(){
         should.exist(res);
         res.status.should.equal(200);
         (res.body.error === null).should.be.true;
-        should.exist(res.body.id);
+        should.exist(res.body.ok);
+        res.body.ok.should.equal(1);
         done();
       });
   });
