@@ -27,7 +27,7 @@ exports.getUsers = function(req, res) {
         .send(err)
         .end();
     }
-
+    console.log(req.user);
     res.json(users);
   });
 };
