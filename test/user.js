@@ -96,7 +96,7 @@ describe("USER unit test",function(){
         res.status.should.equal(200);
         (res.body.error === null).should.be.true;
         should.exist(res.body.id);
-        userId = res.body.id;
+
         done();
       });
   });
@@ -124,7 +124,6 @@ describe("USER unit test",function(){
         res.status.should.equal(200);
         (res.body.error === null).should.be.true;
         should.exist(res.body.id);
-        userId = res.body.id;
         done();
       });
   });
