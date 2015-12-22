@@ -1,3 +1,12 @@
+/**
+ * Routes for OAuth2
+ *
+ * Expose
+ *  - get /oauth2/token
+ *    Return all existing tokens
+ *  - post /oauth2/token
+ *    Create a new token for OAuth2 request
+ */
 var express = require('express');
 var router = express.Router();
 
