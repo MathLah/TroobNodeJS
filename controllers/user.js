@@ -27,7 +27,7 @@ exports.getUsers = function(req, res) {
         .send(err)
         .end();
     }
-    console.log(req.user);
+
     res.json(users);
   });
 };
@@ -49,7 +49,7 @@ exports.getUser = function(req, res) {
 
 exports.updateUser = function(req, res) {
   User.findOne({username: req.params.name}, function(err, user) {
-    console.log(req.params.name);
+
     if (err || user == null) {
       res
         .status(500)

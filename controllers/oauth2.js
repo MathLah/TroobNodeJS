@@ -74,7 +74,6 @@ server.exchange(oauth2orize.exchange.password(function (client, username, passwo
 
             token.save(function (err) {
                 if (err) {
-                  console.log("err", err);
                   return done(err);
                 }
 
@@ -86,7 +85,6 @@ server.exchange(oauth2orize.exchange.password(function (client, username, passwo
 
                 refreshToken.save(function (err) {
                     if (err) {
-                      console.log("err", err);
                       return done(err);
                     }
                     done(null, token, refreshToken, {expires_in: expirationDate});

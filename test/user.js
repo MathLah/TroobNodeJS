@@ -4,14 +4,37 @@ var User = require('../models/user');
 var mongoose = require('mongoose');
 
 var server = supertest.agent("http://localhost:3000");
+var token = null;
 
 describe("USER unit test",function(){
-
+  it("Should LOGIN.", function(done) {
+    server
+      .post('/api/oauth2/token')
+      .send({
+          "grant_type": "password",
+          "username": "mlahousse",
+          "password": "mlahousse",
+          "scope": "*",
+          "clientId": "mlahousse"
+      })
+      .set('Authorization', 'Basic bWxhaG91c3NlOmNsaWVudC1zZWNyZXQ=')
+      .expect("Content-type",/json/)
+      .expect(200)
+      .end(function(err, res){
+        should.exist(res);
+        res.status.should.equal(200);
+        (res.body.error === null).should.be.true;
+        should.exist(res.body.refreshToken);
+        token = res.body.refreshToken;
+        done();
+      });
+  });
   it("Should NOT CREATE an user. Cause : bad request 'No Username'", function(done) {
     server
       .post('/users')
       .send({"password": "testUser"})
       .expect("Content-type",/json/)
+      .set('Authorization', 'Bearer ' + token)
       .expect(500)
       .end(function(err, res){
         should.exist(res);
@@ -28,6 +51,7 @@ describe("USER unit test",function(){
       .post('/users')
       .send({"username": "testUser"})
       .expect("Content-type",/json/)
+      .set('Authorization', 'Bearer ' + token)
       .expect(500)
       .end(function(err, res){
         should.exist(res);
@@ -44,6 +68,7 @@ describe("USER unit test",function(){
       .post('/users')
       .send({"username": "testUser", "password": "testUser"})
       .expect("Content-type",/json/)
+      .set('Authorization', 'Bearer ' + token)
       .expect(200)
       .end(function(err, res){
         should.exist(res);
@@ -59,6 +84,7 @@ describe("USER unit test",function(){
       .post('/users')
       .send({"username": "testUser", "password": "testUser"})
       .expect("Content-type",/json/)
+      .set('Authorization', 'Bearer ' + token)
       .expect(500)
       .end(function(err, res){
         should.exist(res);
@@ -74,6 +100,7 @@ describe("USER unit test",function(){
     server
       .get('/users/testUser')
       .expect("Content-type",/json/)
+      .set('Authorization', 'Bearer ' + token)
       .expect(200)
       .end(function(err, res){
         should.exist(res);
@@ -90,6 +117,7 @@ describe("USER unit test",function(){
       .put('/users/testUser')
       .send({"username": "testUserr"})
       .expect("Content-type",/json/)
+      .set('Authorization', 'Bearer ' + token)
       .expect(200)
       .end(function(err, res){
         should.exist(res);
@@ -105,6 +133,7 @@ describe("USER unit test",function(){
     server
       .get('/users/testUser')
       .expect("Content-type",/json/)
+      .set('Authorization', 'Bearer ' + token)
       .expect(404)
       .end(function(err, res){
         should.exist(res);
@@ -118,6 +147,7 @@ describe("USER unit test",function(){
       .put('/users/testUserr')
       .send({"username": "testUser"})
       .expect("Content-type",/json/)
+      .set('Authorization', 'Bearer ' + token)
       .expect(200)
       .end(function(err, res){
         should.exist(res);
@@ -132,6 +162,7 @@ describe("USER unit test",function(){
     server
       .delete('/users/testUser')
       .expect("Content-type",/json/)
+      .set('Authorization', 'Bearer ' + token)
       .expect(200)
       .end(function(err, res){
         should.exist(res);
