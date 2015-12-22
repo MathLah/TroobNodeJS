@@ -1,7 +1,16 @@
-// Load required packages
+/**
+ * Model Client
+ * OAuth2
+ *
+ * Collection name: Client
+ * Fields :
+ *  - name: String, unique, required
+ *  - id: String, required
+ *  - secret: String, required
+ *  - userId: String, required
+ */
 var mongoose = require('mongoose');
 
-// Define our client schema
 var ClientSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -22,5 +31,4 @@ var ClientSchema = new mongoose.Schema({
   }
 });
 
-// Export the Mongoose model
 module.exports = mongoose.model('Client', ClientSchema);

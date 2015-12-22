@@ -1,7 +1,17 @@
-// Load required packages
+/**
+ * Model Token
+ * OAuth2
+ *
+ * Collection name: Token
+ * Fields :
+ *  - token: String, required
+ *  - expirationDate: String, required
+ *  - userId: String, required
+ *  - clientId: String, required
+ *  - scope: String, required
+ */
 var mongoose = require('mongoose');
 
-// Define our token schema
 var TokenSchema   = new mongoose.Schema({
   token: {
     type: String,
@@ -25,5 +35,4 @@ var TokenSchema   = new mongoose.Schema({
   },
 });
 
-// Export the Mongoose model
 module.exports = mongoose.model('Token', TokenSchema);

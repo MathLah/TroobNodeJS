@@ -1,7 +1,15 @@
+/**
+ * Model User
+ * OAuth2
+ *
+ * Collection name: User
+ * Fields :
+ *  - username: String, required, unique
+ *  - password: String, required
+ */
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
-// Define our user schema
 var UserSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -47,5 +55,4 @@ UserSchema.methods.verifyPassword = function(password, cb) {
   });
 };
 
-// Export the Mongoose model
 module.exports = mongoose.model('User', UserSchema);

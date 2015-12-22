@@ -1,7 +1,15 @@
-// Load required packages
+/**
+ * Model RefreshToken
+ * OAuth2
+ *
+ * Collection name: RefreshToken
+ * Fields :
+ *  - refreshToken: String, required
+ *  - clientId: String, required
+ *  - userId: String, required
+ */
 var mongoose = require('mongoose');
 
-// Define our token schema
 var RefreshTokenSchema   = new mongoose.Schema({
   refreshToken: {
     type: String,
@@ -17,5 +25,4 @@ var RefreshTokenSchema   = new mongoose.Schema({
   }
 });
 
-// Export the Mongoose model
 module.exports = mongoose.model('RefreshToken', RefreshTokenSchema);

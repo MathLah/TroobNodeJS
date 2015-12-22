@@ -14,7 +14,9 @@ exports.postUser = function(req, res) {
         .end();
     }
     else {
-      res.json({ id: user._id });
+      res.header('Location', '/users/' + user.username);
+      res.set('content-type', 'application/json; charset=utf-8');
+      res.json(201, {"ok": 1});
     }
   });
 };
@@ -27,8 +29,10 @@ exports.getUsers = function(req, res) {
         .send(err)
         .end();
     }
-
-    res.json(users);
+    else {
+      res.set('content-type', 'application/json; charset=utf-8');
+      res.json(users);
+    }
   });
 };
 
@@ -41,15 +45,14 @@ exports.getUser = function(req, res) {
         .end();
     }
     else {
+      res.set('content-type', 'application/json; charset=utf-8');
       res.json(user);
     }
-
   });
 }
 
 exports.updateUser = function(req, res) {
   User.findOne({username: req.params.name}, function(err, user) {
-
     if (err || user == null) {
       res
         .status(500)
@@ -68,10 +71,11 @@ exports.updateUser = function(req, res) {
           .end();
       }
       else {
-        res.json({ id: user._id });
+        res.header('Location', '/users/' + user.username);
+        res.set('content-type', 'application/json; charset=utf-8');
+        res.json(200, {"ok": 1});
       }
     });
-
   });
 }
 
@@ -83,12 +87,12 @@ exports.deleteUser = function(req, res) {
         .send(err)
         .end();
     }
-
-    user.remove();
-    res
-      .status(204)
-      .end();
-
+    else {
+      user.remove();
+      res
+        .status(204)
+        .end();
+    }
   });
 };
 
